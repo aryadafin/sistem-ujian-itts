@@ -20,22 +20,40 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF10C3C0),
-          toolbarHeight: 100, // Tinggi AppBar
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          toolbarHeight: 150, // Sesuaikan tinggi AppBar agar lebih banyak ruang
+          title: Column(
+            mainAxisAlignment: MainAxisAlignment
+                .center, // Membuat elemen di dalam Column berada di tengah
+            crossAxisAlignment: CrossAxisAlignment
+                .center, // Menjaga elemen sejajar secara horizontal
             children: [
-              Image.asset(
-                'assets/images/itts.png',
-                height: 80,
-                width: 80,
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // Agar logo dan title di tengah
+                children: [
+                  Image.asset(
+                    'assets/images/itts.png',
+                    height: 80,
+                    width: 80,
+                  ),
+                  SizedBox(width: 10), // Jarak antara logo dan teks
+                  Text(
+                    "Ujian Online ITTS",
+                    style: TextStyle(
+                      color: Color(0xFFF6F9FF),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(width: 10), // Jarak antara logo dan teks
+              SizedBox(height: 8), // Memberikan jarak antara title dan paragraf
               Text(
-                "Ujian Online ITTS",
+                "Modern Application for online exams",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xFFF6F9FF),
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
             ],
