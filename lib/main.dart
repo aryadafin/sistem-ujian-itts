@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'stateful_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,61 +9,127 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Sistem Ujian Online',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xFF10C3C0),
-          toolbarHeight: 150, // Sesuaikan tinggi AppBar agar lebih banyak ruang
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment
-                .center, // Membuat elemen di dalam Column berada di tengah
-            crossAxisAlignment: CrossAxisAlignment
-                .center, // Menjaga elemen sejajar secara horizontal
-            children: [
-              Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.center, // Agar logo dan title di tengah
-                children: [
-                  Image.asset(
-                    'assets/images/itts.png',
-                    height: 80,
-                    width: 80,
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          // Latar belakang SVG
+          SvgPicture.asset(
+            'assets/images/stateless2.svg',
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          SafeArea(
+            child: Column(
+              children: [
+                // AppBar dengan custom desain
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  toolbarHeight: 150,
+                  title: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/itts.png',
+                            height: 80,
+                            width: 80,
+                          ),
+                          const SizedBox(width: 10),
+                          const Text(
+                            "Ujian Online ITTS",
+                            style: TextStyle(
+                              color: Color(0xFFF6F9FF),
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        "Modern Application for online exams",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xFFF6F9FF),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(width: 10), // Jarak antara logo dan teks
-                  Text(
-                    "Ujian Online ITTS",
+                ),
+                const SizedBox(height: 16),
+                // Gambar tengah
+                Center(
+                  child: Image.asset(
+                    'assets/images/splash.png',
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                // Tombol Get Started
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigasi ke StatefulPage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const StatefulPage(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 12),
+                    backgroundColor: const Color(0xFF10C3C0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    "Get Started",
                     style: TextStyle(
-                      color: Color(0xFFF6F9FF),
-                      fontSize: 24,
+                      fontSize: 16,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 8), // Memberikan jarak antara title dan paragraf
-              Text(
-                "Modern Application for online exams",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFFF6F9FF),
-                  fontSize: 16,
                 ),
-              ),
-            ],
+                const Expanded(
+                  child: Center(
+                    child: Text(
+                      "Welcome to the online exam platform!",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        body: SafeArea(
-          child: Text("Coba dulu p"),
-        ),
+        ],
       ),
     );
   }
